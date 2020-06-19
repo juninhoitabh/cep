@@ -23,7 +23,7 @@ A library inicialmente foi criada pelo autor abaixo e a este agradeço pela cont
 Adicione a library
 
 ```shell
-$ composer require jansenfelipe/cep-gratis
+$ composer require juninhoitabh/cep
 ```
     
 Adicione o autoload.php do composer no seu arquivo PHP.
