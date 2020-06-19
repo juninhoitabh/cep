@@ -37,7 +37,7 @@ Agora basta chamar o método `CepGratis::search($cep)`
 ```php
 use JansenFelipe\CepGratis\CepGratis;
 
-$address = CepGratis::search('31030080'); 
+$address = CepGratis::search('31015365'); 
 ```
 
 ### License
