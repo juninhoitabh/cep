@@ -35,7 +35,7 @@ require_once 'vendor/autoload.php';
 Agora basta chamar o método `CepGratis::search($cep)`
 
 ```php
-use JansenFelipe\CepGratis\CepGratis;
+use CepGratis\CepGratis;
 
 $address = CepGratis::search('31015365'); 
 ```
