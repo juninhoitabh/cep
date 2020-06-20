@@ -19,6 +19,7 @@ class CorreiosProvider implements ProviderContract
         ]);
         
         if(!is_null($response)) {
+            
             $crawler = new Crawler($response);
 
             $message = $crawler->filter('div.ctrlcontent p')->html();
@@ -28,15 +29,21 @@ class CorreiosProvider implements ProviderContract
                 $tr = $crawler->filter('table.tmptabela');
 
                 $params['zipcode'] = $cep;
-                $params['street'] = $tr->filter('tr:nth-child(1) td:nth-child(2)')->html();
-                $params['neighborhood'] = $tr->filter('tr:nth-child(2) td:nth-child(2)')->html();
+                try
+                {
+                    $params['street'] = $tr->filter('tr:nth-child(1) td:nth-child(2)')->html();
+                    $params['neighborhood'] = $tr->filter('tr:nth-child(2) td:nth-child(2)')->html();
 
-                $aux = explode('/', $tr->filter('tr:nth-child(3) td:nth-child(2)')->html());
-                $params['city'] = $aux[0];
-                $params['state'] = $aux[1];
+                    $aux = explode('/', $tr->filter('tr:nth-child(3) td:nth-child(2)')->html());
+                    $params['city'] = $aux[0];
+                    $params['state'] = $aux[1];
 
-                $aux = explode(' - ', $params['street']);
-                $params['street'] = (count($aux) == 2) ? $aux[0] : $params['street'];
+                    $aux = explode(' - ', $params['street']);
+                    $params['street'] = (count($aux) == 2) ? $aux[0] : $params['street'];
+                } catch (Exception $e) {
+
+                    
+                }
                 
                 return Address::create(array_map(function ($item) {
                     return urldecode(str_replace('%C2%A0', '', urlencode($item)));
