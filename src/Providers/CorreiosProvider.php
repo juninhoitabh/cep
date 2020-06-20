@@ -41,8 +41,7 @@ class CorreiosProvider implements ProviderContract
                     $aux = explode(' - ', $params['street']);
                     $params['street'] = (count($aux) == 2) ? $aux[0] : $params['street'];
                 } catch (Exception $e) {
-
-                    
+                    return NULL;           
                 }
                 
                 return Address::create(array_map(function ($item) {
