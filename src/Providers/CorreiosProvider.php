@@ -40,6 +40,8 @@ class CorreiosProvider implements ProviderContract
 
                     $aux = explode(' - ', $params['street']);
                     $params['street'] = (count($aux) == 2) ? $aux[0] : $params['street'];
+                    
+                    $params['ibge'] = NULL;
                 } catch (Exception $e) {
                     return NULL;           
                 }
@@ -56,6 +58,7 @@ class CorreiosProvider implements ProviderContract
                     'neighborhood' => NULL,
                     'city'         => NULL,
                     'state'        => NULL,
+                    'ibge'         => NULL,
                 ]);
             }
         }

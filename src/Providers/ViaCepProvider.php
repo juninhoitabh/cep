@@ -26,6 +26,7 @@ class ViaCepProvider implements ProviderContract
                     'neighborhood' => $data['bairro'],
                     'city'         => $data['localidade'],
                     'state'        => $data['uf'],
+                    'ibge'         => $data['ibge'],
                 ]);
             }
         }
