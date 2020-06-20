@@ -10,7 +10,7 @@ use Symfony\Component\DomCrawler\Crawler;
 class CorreiosProvider implements ProviderContract
 {
     /**
-     * @return Address
+     * @return Address|null
      */
     public function getAddress($cep, HttpClientContract $client)
     {
