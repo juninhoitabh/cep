@@ -49,8 +49,8 @@ class CepGratis
     public static function search($cep)
     {
         $cepGratis = new self();
-        $cepGratis->addProvider(new ViaCepProvider());
         $cepGratis->addProvider(new CorreiosProvider());
+        $cepGratis->addProvider(new ViaCepProvider());
 
         $address = $cepGratis->resolve($cep);
 
@@ -80,11 +80,15 @@ class CepGratis
         $time          = time();
         $addressactive = NULL;
         $address       = NULL;
+        $cont          = 0;
 
         do 
         {
             foreach ($this->providers as $provider) {
-
+                if($cont == 1)
+                {
+                    $this->m_sleep(50);
+                }
                 $addressactive = $provider->getAddress($cep, $this->client);
 
                 if(!is_null($addressactive))
@@ -101,8 +105,10 @@ class CepGratis
                     'neighborhood' => NULL,
                     'city'         => NULL,
                     'state'        => NULL,
+                    'ibge'         => NULL,
                 ]);
             }
+            $cont++;
 
         } while (is_null($address));
 
@@ -140,5 +146,9 @@ class CepGratis
     public function setTimeout($timeout)
     {
         $this->timeout = $timeout;
+    }
+
+    private function m_sleep($milliseconds) {
+        return usleep($milliseconds * 1000); // Microseconds->milliseconds
     }
 }

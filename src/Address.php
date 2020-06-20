@@ -14,6 +14,8 @@ class Address
 
     public $state;
 
+    public $ibge;
+
     public static function create(array $data = [])
     {
         $address = new self();
